@@ -46,8 +46,8 @@
     xr-mode-ui="XRMode:xr"
   >
     <a-assets>
-      <a-asset-item id="building-glb" src="Assets/institutonacional1.1.glb"></a-asset-item>
-      <!-- <a-asset-item id="navmesh-glb" src="https://cdn.glitch.global/d29f98b4-ddd1-4589-8b66-e2446690e697/navmesh.glb?v=1644329586500"></a-asset-item> -->
+      <a-asset-item id="building-glb" src="Assets/Instituto2.5.glb"></a-asset-item>
+      <a-asset-item id="navmesh-glb" src="Assets/InstitutoNevMesh2.1.glb"></a-asset-item>
       <a-asset-item id="right-gltf" src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/skeleton-right-hand-webxr/model.gltf"></a-asset-item>
       <a-asset-item id="left-gltf" src="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/skeleton-left-hand-webxr/model.gltf"></a-asset-item>
       <a-asset-item id="watch-gltf" src="https://cdn.glitch.global/d29f98b4-ddd1-4589-8b66-e2446690e697/watch.glb?v=1645016979219"></a-asset-item>
@@ -205,14 +205,14 @@
       </a-gltf-model>
       
       <a-gltf-model id="clock" shadow="receive:true;" src="#clock-gltf" position="-5 0 1.8" rotation="0 51 0" physx-body-from-model="type:dynamic;mass:15;"></a-gltf-model>
-      <a-gltf-model class="navmesh" src="#navmesh-glb" visible="false"></a-gltf-model>
+      <a-gltf-model class="navmesh" src="#navmesh-glb" visible="false" gltf-model="Assets/InstitutoNevMesh2.1.glb" position="0 -1.78648 5.01"></a-gltf-model>
       <a-gltf-model src="#building-glb"
         id="building"
         shadow="cast:false;receive:true;"
         rotation="0" 
-        scale="3 3 3" 
-        position="35.53979 0.00346 4.98485" 
-        gltf-model="Assets/institutonacional1.1.glb"></a-gltf-model>
+        scale="" 
+        position="0 -1.47553 4.985" 
+        gltf-model="Assets/Instituto2.5.glb" visible=""></a-gltf-model>
       ></a-gltf-model>
     </a-entity>
 
