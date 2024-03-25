@@ -43,7 +43,7 @@
 <body>
   <a-scene
     physx="autoLoad: true; delay: 1000; wasmUrl: https://cdn.jsdelivr.net/gh/c-frame/physx@v0.1.0/wasm/physx.release.wasm; useDefaultScene: false;"
-    webxr="overlayElement:#dom-overlay;" background="color:red;" reflection="directionalLight:#dirlight;"
+    webxr="overlayElement:#dom-overlay;" background="color:white;" reflection="directionalLight:#dirlight;"
     renderer="alpha:true;physicallyCorrectLights:true;colorManagement:true;exposure:2;toneMapping:ACESFilmic;"
     ar-hit-test="target:#my-ar-objects;type:footprint;footprintDepth:0.2;" shadow="type: pcfsoft"
     gltf-model="dracoDecoderPath: https://www.gstatic.com/draco/versioned/decoders/1.5.6/;" ar-cursor
@@ -174,37 +174,55 @@
 
       <!-- Este plano solo es visible en RA y sigue al objetivo dado para proporcionarle sombras.-->
 
-      <a-entity light="angle: 60.35; type: spot" position="28.57625 3.27402 -26.43901"
-        rotation="0 87.39153361791907 0"></a-entity>
+      <a-light id="dirlight" shadow-camera-automatic="[ar-shadow-helper],#table,#ladder" intensity="0.8" light="castShadow:true;type:directional" position="0 3 -6"></a-light>
+    
+    <a-entity ar-shadow-helper="target:#my-ar-objects;light:#dirlight;" visible="false">
+      <a-plane rotation="-90 0 0" shadow="cast:false;receive:true;" position="0 0.01 0" material="shader:shadow; depthWrite:false; opacity:0.9;"></a-plane>
+    </a-entity>
 
-      <a-light id="dirlight" shadow-camera-automatic="[ar-shadow-helper],#table,#ladder" intensity="0.8"
-        light="intensity: 3.27; castShadow: true; color: #ece8da; decay: 1.57; distance: 0.37; penumbra: 0.13; shadowBias: -0.17; shadowMapHeight: 514.82; shadowMapWidth: 512.61"
-        position="0 11.84319 -31.24299" scale="2.94 3.57 2.72">
-      </a-light>
+    <a-entity hide-on-enter-ar position="0 -0.1 0" 
+    environment="preset:default;active:true;seed: 3; 
+    skyType: gradient; 
+    skyColor: #93DDFF; 
+    horizonColor: ##FFFEF2 ; 
+    lightPosition: 10 10 10; 
+    fog: 0.8; 
+    ground: none; 
+    dressing: dressingColor: #888b1d; dressingScale: 1; dressingVariance: 10 9.6 10; gridColor: #c5a543; groundYScale: 0; dressingOnPlayArea: 0.0"></a-entity>
 
-      <a-entity ar-shadow-helper="target:#my-ar-objects;light:#dirlight;" visible="false">
-        <a-plane rotation="-90 0 0" shadow="cast:false;receive:true;" position="0 0.01 0"
-          material="shader:shadow; depthWrite:false; opacity:0.9;"></a-plane>
-      </a-entity>
+    
+		<a-entity rotation="0 -50 0" position="0 0 0" hide-on-enter-ar>
 
-      <a-entity hide-on-enter-ar class="environment" position="0 -5.08319 0" visible="false"
-        environment="lighting:none;shadow:true;preset: default;">
-      </a-entity>
-
-      <a-gltf-model id="CajaDignidad" shadow="" src="#CajaDignidad-glb" position="9.341 0.079 -1.77877"
-        rotation="-0.3179915762976069 -73.10884170089791 0.5288400449057499" gltf-model="Assets/CajaDignidad_.glb"
-        physx-material="density: NaN" grab-options="scalable" physx-body="type: static"
-        scale="0.3 0.3 0.3"></a-gltf-model>
+      <a-gltf-model 
+      id="CajaDignidad" 
+      shadow="" 
+      src="#CajaDignidad-glb" 
+      position="9.341 0.079 -1.77877"
+      rotation="-0.3179915762976069 -73.10884170089791 0.5288400449057499" 
+      gltf-model="Assets/CajaDignidad_.glb"
+      physx-material="density: NaN" 
+      grab-options="scalable" 
+      physx-body="type: static"
+      scale="0.3 0.3 0.3"></a-gltf-model>
 
       <a-gltf-model gltf-model="Assets/InstitutoNavMesh3.0.glb" scale="1.5 1.5 1.5" position="0 -1.45965 4.985"
         class="navmesh" src="#navmesh-glb" visible="false"></a-gltf-model>
 
-      <a-gltf-model src="#building-glb" id="building" shadow="receive:true;" rotation="0"
-        gltf-model="Assets/Instituto2.7.glb" scale="1.5 1.5 1.5" position="0 -1.45965 4.985" visible=""></a-gltf-model>
+      <a-gltf-model 
+      src="#building-glb" 
+      id="building" 
+      shadow="cast:false;receive:true;" 
+      rotation="0"
+      gltf-model="Assets/Instituto2.7.glb" 
+      scale="1.5 1.5 1.5" 
+      position="0 -1.45965 4.985" 
+      visible=""
+      no-tonemapping="Light">
+      </a-gltf-model>
 
     </a-entity>
 
-    <a-sphere color="black" radius="0.005" id="cursor" material="shader:flat" visible="false"></a-sphere>
+    <a-sphere color="black" radius="0.005" id="cursor" material="" visible="false"></a-sphere>
 
   </a-scene>
 
@@ -214,7 +232,7 @@
     </h1>
     <div class="overlay-footer">
       <section
-        style="display: inline-block; background: #ffffff; opacity: .4;; color: #333333; opacity: 1.0;; border-radius: 1em; padding: 1em; margin:0; accent-color:#ffffff;"
+        style="display: inline-block; background: #ffffff; opacity: .4;; color: #333333; border-radius: 1em; padding: 1em; margin:0; accent-color:#ffffff;"
         id="my-interface">
         <h2>Configuraciòn_</h2>
         <fieldset style="border:none;">
@@ -259,16 +277,6 @@
   </div>
 
   <!-- Loader -->
-
-   <div class="loader-wrapper">
-    <span class="loader"><span class="loader-inner"></span></span>
-  </div>
-
-   <script>
-    $(window).on("load", function () {
-      $(".loader-wrapper").fadeOut("slow");
-    })
-  </script>
 
 </body>
 
